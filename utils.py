@@ -46,9 +46,6 @@ def ask_ollama(prompt):
 # =====================================================
 #  IA VISION (LLAVA)
 # =====================================================
-# =====================================================
-#  IA VISION (LLAVA) — Nouvelle version
-# =====================================================
 
  
 def analyze_image_with_ollama(image_path):
@@ -70,7 +67,7 @@ def analyze_image_with_ollama(image_path):
 
         {
             "items": [
-                {"name": "nom de l'aliment", "calories": nombre, "color": "vert|orange|rouge"}
+                {"name": "nom de l'aliment", "calories": nombre, "nutriments" : "nom des nutriments"}
             ],
             "total": nombre,
             "advice": "phrase de conseil en français"
@@ -118,7 +115,7 @@ def analyze_image_with_ollama(image_path):
 DB_CONFIG = {
     "host": "localhost",
     "user": "root",
-    "password": "30Juin2006*",
+    "password": "***",
     "database": "wellbeing"
 }
 
