@@ -1,0 +1,219 @@
+\documentclass[a4paper, 12pt, twoside]{article}
+\usepackage[utf8]{inputenc}		% LaTeX, comprend les accents !
+\usepackage[T1]{fontenc}		
+\usepackage[francais]{babel}
+\usepackage{lmodern}
+\usepackage{ae,aecompl}
+\usepackage[top=2.5cm, bottom=2cm, 
+			left=3cm, right=2.5cm,
+			headheight=15pt]{geometry}
+\usepackage{graphicx}
+\usepackage{eso-pic}	% Nécessaire pour mettre des images en arrière plan
+\usepackage{array} 
+\usepackage{hyperref}
+\input{pagedegarde}
+
+
+\title{WellBeing}
+\entreprise{}
+\datedebut{21 Octobre 2025}
+\datefin{31 Décembre 2025}
+
+
+
+\membrea{Ait Mebarek Malika 44018544}
+\membreb{Mohamed Naïla 44013473}
+\membrec{}
+\membred{}
+\membree{https://github.com/nina1310/WellBeing}
+
+
+\begin{document}
+\pagedegarde
+\section*{Remerciements}
+Merci, merci à tous.
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+    Ce semestre, nous avons décidé de réaliser un projet appliqué au domaine de la santé. Loin d'avoir une quelconque légitimité médicale, notre site permet surtout d'apporter un soutien dans le suivi de son alimentation, et réaliser des analyses de données (graphiques, analyses d'images...). On y retrouve également un blog où pourront être publiés de nombreux articles portant sur la santé et le bien-être. \\ Bonne lecture :)
+
+\begin{figure}[h]
+\centering
+\includegraphics{logo.png}
+\caption{Le logo}
+\label{Wellbeing}
+\end{figure}
+
+
+\section{Environnement de travail}
+Afin de développer WellBeing, nous avons eu recours à de nombreuses technologies différentes.\\
+On ne peut commencer autrement qu’en mentionnant notre principal allié : ChatGPT+. Après avoir testé plusieurs autres intelligences artificielles, il s’est révélé être le plus performant. Il nous a aidées aussi bien sur des problématiques techniques — comme l’installation des outils nécessaires, l’utilisation des processus Shell ou certains débogages — que sur des aspects plus méthodologiques, notamment lors de la phase de conception du projet et de la définition de l’architecture globale de l’application.\\
+Nous avons ensuite utilisé VS Code comme environnement de développement (IDE). Celui-ci est simple à prendre en main, compatible avec la majorité des langages de programmation et, surtout, permet une interaction directe avec GitHub. Nous avons ainsi créé un dépôt GitHub commun dans lequel nous pouvions déposer nos codes après modification ou amélioration, ce qui nous permettait de toujours disposer toutes les deux de la version la plus récente du projet.\\
+Dans la continuité de nos enseignements en bases de données, nous avons utilisé MySQL Workbench, le SGBD étudié en cours. Nous y avons créé une base de données reliée à WellBeing, recensant les connexions, les nouveaux comptes créés ainsi que les informations associées.\\
+Enfin, il nous fallait une intelligence artificielle capable d’analyser les images de repas importées par les utilisateurs. Pour cela, nous avons utilisé Ollama avec le modèle llava-phi3, une IA open source pouvant être intégrée localement à notre application. Bien que ses analyses restent parfois imparfaites et instables, elle remplit néanmoins sa fonction.
+
+
+ 
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{Capture d’écran 2025-12-29 à 19.05.08.png}
+\caption{Ollama}
+\end{figure}
+
+
+
+\newpage
+\section{Description du projet et objectifs}
+Dans un premier temps, nous souhaitions concevoir une application destinée aux personnes atteintes de diabète, leur permettant de suivre une alimentation adaptée ainsi que l’évolution de leurs constantes de santé. Toutefois, le diabète est une maladie nécessitant un suivi médical rigoureux et l’utilisation de dispositifs spécialisés. Il nous est donc apparu plus pertinent de développer une application accessible et utile à un public plus large.\\
+À une époque où la mauvaise alimentation tend à devenir une habitude, il est aujourd’hui bien établi qu’elle a des conséquences néfastes, tant sur la santé physique que mentale. Une alimentation déséquilibrée peut entraîner des troubles du sommeil, détériorer la santé mentale en favorisant l’apparition d’états anxieux, voire dépressifs, et conduire, à long terme, à des maladies graves telles que les pathologies cardiovasculaires ou neurodégénératives. Or, la santé constitue notre bien le plus précieux. Nous sommes convaincues que la mise à disposition d’outils numériques adaptés peut encourager, en particulier chez les jeunes, l’adoption de comportements plus sains.\\
+Ainsi, notre application permet aux utilisateurs d’enregistrer leurs informations de santé au sein d’un compte personnel (âge, poids, etc.). Ces données sont ensuite utilisées pour générer un score de bien-être ainsi qu’un graphique d’évolution, offrant une visualisation claire des progrès réalisés. L’application intègre également un blog proposant des articles dédiés à la santé et à la nutrition. Enfin, sa fonctionnalité principale repose sur l’analyse de repas à partir d’une photographie importée, permettant aux utilisateurs d’obtenir un retour sur la qualité nutritionnelle de leurs repas.
+
+
+\section{Bibliothèques, Outils et technologies}
+
+Notre application est développée en Python, un langage qui se distingue par sa lisibilité et sa simplicité. Ce choix nous permet de comprendre facilement le fonctionnement des différentes fonctions et de les modifier aisément si nécessaire.\\
+Nous avons ainsi utilisé plusieurs bibliothèques Python, chacune ayant un rôle précis dans le fonctionnement de l’application :
+CustomTkinter : utilisée pour la création de l’interface graphique de l’application ;
+Matplotlib : intervient dans l’affichage du graphique représentant le score de bien-être ;
+MySQL Connector : permet la communication entre l’application Python et la base de données ;
+Requests : utilisée pour l’appel de services externes, notamment pour l’intelligence artificielle chargée de l’analyse des images ;
+Hashlib : fournit des fonctions de hachage, notamment utilisées pour la sécurisation des données sensibles.\\
+Par ailleurs, une base de données MySQL est utilisée afin de stocker les informations des utilisateurs (profil, données de santé, historique des scores). Cette solution assure une gestion structurée, fiable et pérenne des données sur le long terme.\\
+\\
+Concernant Ollama, il s’agit d’une intelligence artificielle locale reposant sur le modèle LLaVA-Phi3. Cette IA permet d’analyser des images de repas afin d’identifier les aliments, d’estimer leur apport calorique et de proposer des conseils nutritionnels. Le choix d’une solution locale nous permet d’exécuter des modèles spécifiques directement sur la machine une fois ceux-ci installés. L’application communique avec l’IA via des requêtes HTTP ou des appels système, en envoyant des entrées et en recevant les réponses générées par le modèle (les prompts et appels correspondants sont visibles dans le fichier utils.py).
+Cependant, ce mode de fonctionnement implique des contraintes techniques importantes, fortement dépendantes des performances de la machine locale. Dans le cadre du projet, les temps de réponse peuvent être relativement longs et la consommation de ressources système s’avère parfois élevée.
+\\\\\\
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{Capture d’écran 2025-12-29 à 19.14.11.png}
+\caption{Création de la base de données SQL}
+\end{figure}
+
+
+\newpage
+\section{Travail réalisé}
+
+ Nous sommes parvenues à mettre en place la fonctionnalité clé de notre application : l’analyse de repas à partir d’une image importée. Toutefois, le résultat n’est pas totalement à la hauteur de nos attentes initiales. Nous envisagions d’intégrer une clé API pour l’analyse des images, mais cela n'a pas été possible à cause de certaines contraintes techniques (cf. Difficultés rencontrées). Nous avons donc opté pour une alternative locale en utilisant Ollama, notamment à travers la conception d’un prompt adapté.\\
+Par ailleurs, la connexion à un compte utilisateur permet d’enregistrer des données de suivi telles que l’âge, le poids ou la taille. Ces informations sont utilisées pour calculer un score de santé (lié à l'IMC), accompagné d’un graphique illustrant l’évolution et l’historique de ce score. Bien que la mise en place de la base de données nous ait initialement semblé complexe, celle-ci s’est révélée fonctionnelle et autonome une fois correctement configurée.\\
+Nous avons également intégré un blog permettant la publication d’articles en lien avec la santé et le bien-être. Les contenus peuvent être rédigés directement depuis l’application et sont ensuite enregistrés sous forme de fichiers texte dans un dossier dédié nommé "articles".\\
+Suite à vos recommandations, nous avons renforcé la sécurité de l’application en ajoutant une fonction de hachage et en limitant la longueur des champs identifiant et mot de passe à 30 caractères. Un formulaire de contact a également été ajouté.\\
+Enfin, l’interface graphique, développée à l’aide de CustomTkinter, est responsive et reste accessible grâce à une organisation claire reposant sur des titres et des visuels adaptés. La gestion des rôles (administrateur / utilisateur) n’a en revanche pas encore été implémentée à ce stade du projet.
+\\
+\\\\
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{basededonnées.JPG}
+\caption{Aperçu de la base de données avec les connexions et les mots de passe hachés}
+\end{figure}
+
+
+\newpage
+\section{Difficultés rencontrées}
+
+Au cours du développement du projet WellBeing, plusieurs difficultés techniques ont été rencontrées, en particulier concernant l’analyse d’images de repas, qui constituait une fonctionnalité centrale de l’application.\\
+Dans un premier temps, cette fonctionnalité reposait sur les API d’inférence de Hugging Face. Toutefois, leur intégration s’est révélée complexe et peu stable. Certains endpoints utilisés ont été dépréciés, entraînant des erreurs de type 410 Gone, tandis que les nouveaux endpoints nécessitaient une configuration très précise. Malgré plusieurs tentatives (changement de modèles, ajustement des paramètres, gestion du format des images), les requêtes échouaient régulièrement avec des erreurs Not Found ou des réponses HTML inattendues, rendant l’analyse d’image difficilement exploitable.\\
+Face à ces limitations, d’autres solutions ont été étudiées, notamment les API proposées par Mistral et Google. Cependant, ces alternatives présentaient des contraintes incompatibles avec le cadre du projet étudiant, telles que des quotas gratuits très limités, l’obligation de fournir une carte bancaire ou une complexité de mise en œuvre trop importante. Ces éléments ont montré que l’accès à l’IA multimodale reste difficile dans un contexte gratuit et académique.\\
+Une autre approche a consisté à utiliser Ollama en local afin de se passer des API distantes. Bien que cette solution ait permis de mieux comprendre le fonctionnement des modèles hors ligne, les performances obtenues se sont révélées insuffisantes pour une application interactive. Les temps de réponse étant trop élevés et la consommation de ressources importante, ce qui dégrade finalement l’expérience utilisateur.\\
+Enfin, en parallèle des problématiques liées à l’IA, certains problèmes techniques ont également été rencontrés au niveau de l’interface graphique. Des erreurs survenaient lors de la fermeture ou du changement de pages de l’application, nécessitant des corrections spécifiques afin d’assurer la stabilité globale du projet.
+
+\section{Bilan}
+	\subsection{Conclusion}
+Nous sommes très satisfaites de ce projet, qui s’est révélé particulièrement formateur. Il nous a permis de découvrir et d’utiliser pour la première fois certaines technologies, tout en nous confrontant à de nombreux bugs. Ces difficultés nous ont amenées à nous remettre constamment en question et à développer une véritable démarche de résolution de problèmes. Par ailleurs, ce projet s’inscrit dans notre premier semestre d’étude des bases de données, et il a été très enrichissant de pouvoir mettre en pratique des connaissances récemment acquises.
+La participation à la Nuit de l’Info a également été une expérience marquante. Elle nous a permis de recueillir de nombreux conseils, mais aussi de découvrir différentes approches de programmation, ainsi que les technologies utilisées par nos camarades. Ces échanges ont constitué une source d’inspiration et ont contribué à l’amélioration de la programmation de WellBeing.
+Enfin, la nutrition et la santé sont des thématiques qui nous tiennent particulièrement à cœur. Nous sommes convaincues qu’à l’ère du numérique, il est essentiel de mobiliser les outils technologiques à notre disposition afin d’accompagner notre génération, ultra-connectée, vers un épanouissement durable, tant sur le plan physique que mental.
+	\subsection{Perspectives}
+À l’avenir, nous aimerions continuer à faire évoluer WellBeing en y intégrant une API plus performante, afin de rendre l’application encore plus fiable et efficace. Nous serions également ravies de pouvoir, à terme, déployer l’application en ligne, pour la rendre accessible au plus grand nombre et lui donner une nouvelle dimension.
+
+
+
+\newpage
+\section{Webographie}
+\begin{thebibliography}{2}
+ Analyse photo intelligente : 
+ \bibitem[Slimbot]{cat}\url{https://slimbot.fr/analyse-photo} 
+ \\
+ \\
+Article sur l'IA appliquée à la nutrition : \bibitem[Foodvisor]{cat} \url{https://www.foodvisor.io/fr/guides/article/lintelligence-artificielle-appliquee-a-la-nourriture/}
+\\
+\\
+Pour la  culture : \bibitem[Santé magazine]{cat} \url{https://www.santemagazine.fr/actualites/actualites-alimentation/voici-pourquoi-prendre-votre-assiette-en-photo-est-bon-pour-vous-1092125}
+\\
+\\
+Pour nos amis diabétiques : \bibitem[Mydiabby]{cat} \url{https://www.mydiabby.com} 
+
+\end{thebibliography}
+
+
+\newpage
+\section{Annexes}
+\appendix
+\makeatletter
+\def\@seccntformat#1{Annexe~\csname the#1\endcsname:\quad}
+\makeatother
+	\section{Exemple d'exécution du projet}
+    
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{connexionnaila.png}
+\caption{Connexion/création de compte}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{profilmajnaila.png}
+\caption{Profil utilisateur}
+\end{figure}
+
+\newpage
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{Capture d’écran 2025-12-30 à 22.59.30.png}}
+\caption{Graphique}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{graphique.jpeg}
+\caption{Graphique}
+\end{figure}
+
+\newpage
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{analyse.jpeg}
+\caption{Analyse de repas}
+\end{figure}`
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{Capture d’écran 2025-12-31 à 14.55.53.png}
+\caption{Blog}
+\end{figure}
+
+\newpage
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{contact.png}
+\caption{Formulaire de contact}
+\end{figure}
+
+
+
+\section{Manuel utilisateur}
+    
+1) En entrant sur le site, cliquer sur le bouton "Créer un compte"
+
+2) Création d'un compte - attention à ne pas utiliser un email déja pris
+
+3) Une petite fenêtre s'ouvre, indiquant que le compte a bien été crée ; il est important de cliquer sur OK, sinon la connexion peut bloquer
+
+4) Redirection vers la page de connexion - taper son pseudo et mot de passe à l'identique
+
+5) Arrivée sur le Tableau de Bord : Possibilié d'analyser un repas en important une image via le bouton prévu à ce sujet, modifier les informations personnelles, lire des articles sur la santé...
+
+
+\end{document}
