@@ -67,7 +67,7 @@ def analyze_image_with_ollama(image_path):
 
         {
             "items": [
-                {"name": "nom de l'aliment", "calories": nombre, "nutriments" : "nom des nutriments"}
+                {"name": "nom de l'aliment", "calories": nombre}
             ],
             "total": nombre,
             "advice": "phrase de conseil en français"
